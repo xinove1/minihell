@@ -8,7 +8,7 @@ CFLAGS=-Wall -Wextra -Werror
 
 RM=rm -f
 
-SRC= main.c
+SRC= main.c echo.c pwd.c cd.c
 
 BONUS=
 
