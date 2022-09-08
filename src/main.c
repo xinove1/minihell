@@ -2,12 +2,16 @@
 
 int main(int argc, char *argv[])
 {
+	//TODO deal with user passing args to minishell
 	(void) argc;
 	(void) argv;
-	ft_printf("hello world\n");
-	//echo(argc, argv);
-	//pwd(argc, argv);
-	//cd(argc, argv);
-	ft_printf("goodbye world\n");
+
+	char *line;
+	while (1)
+	{
+		line = readline("minishell >");
+		add_history(line);
+		free(line);
+	}
 	return (0);
 }

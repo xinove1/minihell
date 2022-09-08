@@ -1,6 +1,10 @@
 #ifndef MINIHELL_H
 # define MINIHELL_H
 # include "../libft/libft.h"
+# include <stdlib.h>
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include <errno.h>
 
 # define PATH_MAX 1024
