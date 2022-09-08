@@ -1,38 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dienasci <dienasci@student.42sp.org.br >   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/07 16:22:05 by dienasci          #+#    #+#             */
-/*   Updated: 2022/09/07 16:22:43 by dienasci         ###   ########.fr       */
+/*   Created: 2022/09/07 16:22:17 by dienasci          #+#    #+#             */
+/*   Updated: 2022/09/07 16:25:10 by dienasci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minihell.h"
+#include "../minihell.h"
 
-int echo(int argc, char *argv[])
+int	cd(int argc, char *argv[])
 {
-	char	endline;
-	int		index;
+	int	ret;
 
-	if (argc == 1)
-		return -1;
-	endline = '\n';
-	index = 0;
-	if(ft_strncmp("-n", argv[1], 2) == 0)
-	{
-		endline = 0;
-		index++;
-	}
-	while(argv[++index])
-	{
-		write(1, argv[index], ft_strlen(argv[index]));
-		if(argv[index+1] != NULL)
-			write(1, " ", 1);
-	}
-	if(endline)
-		write(1, &endline, 1);
-	return 0;
+	if (argc != 2)
+		return (-1);
+	ret = chdir(argv[1]);
+	return (ret);
 }

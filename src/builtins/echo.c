@@ -1,38 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dienasci <dienasci@student.42sp.org.br >   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/07 16:22:25 by dienasci          #+#    #+#             */
-/*   Updated: 2022/09/07 16:22:26 by dienasci         ###   ########.fr       */
+/*   Created: 2022/09/07 16:22:05 by dienasci          #+#    #+#             */
+/*   Updated: 2022/09/07 16:22:43 by dienasci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minihell.h"
+#include "../minihell.h"
 
-extern int errno;
-
-int pwd(int argc, char *argv[])
+int	echo(int argc, char *argv[])
 {
-	char	*buff;
-	int		mult;
+	char	endline;
+	int		index;
 
-	(void)argc;
-	(void)argv;
-	mult = 1;
-	buff = ft_calloc(4096 * mult, sizeof(char));
-	getcwd(buff, 4096 * mult);
-	while(errno == ERANGE)
+	if (argc == 1)
+		return (-1);
+	endline = '\n';
+	index = 0;
+	if (ft_strncmp("-n", argv[1], 2) == 0)
 	{
-		free(buff);
-		mult++;
-		buff = ft_calloc(4096 * mult, sizeof(char));
-		getcwd(buff, 4096 * mult);
+		endline = 0;
+		index++;
 	}
-	write(1, buff, 4096 * mult);
-	write(1, "\n", 1);
-	free(buff);
-	return 0;
+	while (argv[++index])
+	{
+		write(1, argv[index], ft_strlen(argv[index]));
+		if (argv[index + 1] != NULL)
+			write(1, " ", 1);
+	}
+	if (endline)
+		write(1, &endline, 1);
+	return (0);
 }

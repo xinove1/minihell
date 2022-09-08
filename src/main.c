@@ -2,6 +2,8 @@
 
 int main(int argc, char *argv[])
 {
+	(void) argc;
+	(void) argv;
 	ft_printf("hello world\n");
 	//echo(argc, argv);
 	//pwd(argc, argv);

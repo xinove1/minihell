@@ -1,6 +1,6 @@
 NAME= minishell
 
-LIBFT = ./libft
+LIBFT= ./libft
 
 CC=gcc
 
@@ -8,37 +8,29 @@ CFLAGS=-Wall -Wextra -Werror
 
 RM=rm -f
 
-SRC= main.c echo.c pwd.c cd.c
+BUILTINS= echo.c pwd.c cd.c
 
-BONUS=
+SRC= main.c
 
-BONUS_NAME =
+SRC_ALL= $(addprefix src/, $(SRC)) \
+		 $(addprefix src/builtins/, $(BUILTINS)) \
 
-BONUS_OBJ = $(BONUS:.c=.o)
+OBJ= $(SRC:.c=.o) $(BUILTINS:.c=.o)
 
-OBJ=$(SRC:.c=.o)
-
-$(NAME): $(addprefix src/, $(SRC)) src/minihell.h
+$(NAME): $(SRC_ALL) src/minihell.h
 	@make -C $(LIBFT)
-	$(CC) $(CFLAGS) -c $(addprefix src/, $(SRC))
+	$(CC) $(CFLAGS) -c $(SRC_ALL)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT)/libft.a  -o $(NAME)
 
 all: $(NAME)
 
-$(BONUS_NAME): $(addprefix src/, $(BONUS)) src/minihell.h
-	@make -C $(LIBFT)
-	$(CC) $(CFLAGS) -c $(addprefix src/, $(BONUS))
-	$(CC) $(CFLAGS) $(BONUS_OBJ) $(LIBFT)/libft.a  -o $(BONUS_NAME)
-
-bonus: $(BONUS_NAME)
-
 clean:
 	@make -C $(LIBFT) clean
-	@$(RM) $(OBJ) $(BONUS_OBJ)
+	@$(RM) $(OBJ)
 
 fclean:
 	@make -C $(LIBFT) fclean
-	@$(RM) $(NAME) $(BONUS_NAME) $(OBJ) $(BONUS_OBJ)
+	@$(RM) $(NAME) $(OBJ)
 
 re: fclean all
 
