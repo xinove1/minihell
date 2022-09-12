@@ -12,10 +12,6 @@
 
 #include "../minihell.h"
 
-//TODO oque e isso
-// ta contando como variavel global ent vai tenque tirar
-extern int errno;
-
 int	pwd(int argc, char *argv[])
 {
 	char	*buff;
@@ -36,5 +32,5 @@ int	pwd(int argc, char *argv[])
 	write(1, buff, 4096 * mult);
 	write(1, "\n", 1);
 	free(buff);
-	return (0);
+	return (EXIT_SUCCESS);
 }

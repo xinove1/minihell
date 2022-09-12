@@ -16,8 +16,11 @@ int	cd(int argc, char *argv[])
 {
 	int	ret;
 
+	// TODO cd without args defaults to cd "./~" (verify on bash docs)
 	if (argc != 2)
-		return (-1);
+		return (EXIT_FAILURE);
 	ret = chdir(argv[1]);
-	return (ret);
+	if (ret < 0)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }

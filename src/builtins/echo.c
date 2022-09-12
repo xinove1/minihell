@@ -17,8 +17,9 @@ int	echo(int argc, char *argv[])
 	char	endline;
 	int		index;
 
+	//NOTE echo does not seem to exit with error when no args are given, confirm
 	if (argc == 1)
-		return (-1);
+		return (EXIT_FAILURE);
 	endline = '\n';
 	index = 0;
 	if (ft_strncmp("-n", argv[1], 2) == 0)
@@ -34,5 +35,5 @@ int	echo(int argc, char *argv[])
 	}
 	if (endline)
 		write(1, &endline, 1);
-	return (0);
+	return (EXIT_SUCCESS);
 }
