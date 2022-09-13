@@ -15,22 +15,20 @@
 int	echo(int argc, char *argv[])
 {
 	char	endline;
-	int		index;
+	int		i;
 
-	//NOTE echo does not seem to exit with error when no args are given, confirm
-	if (argc == 1)
-		return (EXIT_FAILURE);
+	(void) argc;
 	endline = '\n';
-	index = 0;
-	if (ft_strncmp("-n", argv[1], 2) == 0)
+	i = 0;
+	if (argv[1] && argv[1][0] == '-' && argv[1][1] == 'n' && argv[1][2] == '\0')
 	{
 		endline = 0;
-		index++;
+		i++;
 	}
-	while (argv[++index])
+	while (argv[++i])
 	{
-		write(1, argv[index], ft_strlen(argv[index]));
-		if (argv[index + 1] != NULL)
+		write(1, argv[i], ft_strlen(argv[i]));
+		if (argv[i + 1] != NULL)
 			write(1, " ", 1);
 	}
 	if (endline)
