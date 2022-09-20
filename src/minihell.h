@@ -63,4 +63,13 @@ int	echo(int argc, char *argv[]);
 int	pwd(int argc, char *argv[]);
 int	cd(int argc, char *argv[]);
 
+//Parsing
+t_cmd	parse_cmd(t_data *data, char *line);
+int	count_args(char *l, char *el);
+char	**parse_cmd_args(char *l, char *el);
+char	*expand_var(char *var);
+
+//Extra
+void	free_2darray(char **array);
+
 #endif // MINIHELL_H_

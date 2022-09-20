@@ -1,7 +1,6 @@
 #include "minihell.h"
 
 static void	shell_loop(t_data *data);
-void	parse_cmd(t_data *data, char *line);
 
 int	main(int argc, char *argv[], char *envp[])
 {
@@ -9,19 +8,22 @@ int	main(int argc, char *argv[], char *envp[])
 
 	(void) argv;
 	(void) envp;
+
+	for (int i=0; i < argc;i++)
+		ft_printf("%s\n", argv[i]);
 	if (argc > 1)
 	{
 		ft_putstr_fd("Error\nMinishell does not accept any arguments. Please check the README.\n", 2);
 		exit(1);
 	}
-
 	// TODO init data
 	// TODO parse envp, hash table maybe?
 	// TODO setup signals
-
 	shell_loop(&data);
 	return (0);
 }
+
+static void test_parse(char *line);
 
 static void	shell_loop(t_data *data)
 {
@@ -29,33 +31,39 @@ static void	shell_loop(t_data *data)
 
 	while (1)
 	{
-		pwd(1, NULL);
+		//pwd(1, NULL);
 		//NOTE prompt
 		line = readline("minishell >");
 		add_history(line);
+		ft_printf("line count: %d | line: %s\n", count_args(line, line + ft_strlen(line)), line);
+		test_parse(line);
+		//ft_printf("line[0]: %c line[strlen]: %c\n", line[0], line[ft_strlen(line) - 1]);
 		parse_cmd(data, line);
 		//Exec tree
 		free(line);
 	}
 }
 
-//should return first node or null
-void	parse_cmd(t_data *data, char *line)
+static void test_parse(char *line)
 {
-	(void) data;
+	char **args;
+	int		i;
 
-	// NOTE Also check there is only cd/exit on the line
-	// cd/exit followed by newline should work too
-	if (!ft_strncmp("cd ", line, 3))
+	ft_printf("Testing parse_cmd_args with line\n");
+	ft_printf("--------------------------------\n");
+	i = 0;
+	args = parse_cmd_args(line, line + ft_strlen(line));
+	if (!args)
 	{
-		cd(2, (char *[2]){"cd", line + 3});
+		ft_printf("Error on parsing\n");
 		return ;
 	}
-	else if (!ft_strncmp("exit ", line, 5))
+	ft_printf("args:\n");
+	while (args[i])
 	{
-		//CLEAN memory
-		exit(EXIT_SUCCESS);
+		ft_printf("\t%s\n", args[i]);
+		i++;
 	}
-	// parse line
-	// return node
+	ft_printf("--------------------------------\n");
+	free_2darray(args);
 }

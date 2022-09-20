@@ -10,12 +10,15 @@ RM=rm -f
 
 BUILTINS= echo.c pwd.c cd.c
 
-SRC= main.c
+PARSER= parser.c cmd_args_count.c parse_cmd_args.c
+
+SRC= main.c utils.c
 
 SRC_ALL= $(addprefix src/, $(SRC)) \
 		 $(addprefix src/builtins/, $(BUILTINS)) \
+		 $(addprefix src/parser/, $(PARSER)) \
 
-OBJ= $(SRC:.c=.o) $(BUILTINS:.c=.o)
+OBJ= $(notdir $(SRC_ALL:.c=.o))
 
 $(NAME): $(SRC_ALL) src/minihell.h
 	@make -C $(LIBFT)
