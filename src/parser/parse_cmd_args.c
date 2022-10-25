@@ -5,6 +5,7 @@ static char	*single_quote(char **l, char *el, char **head, char *r);
 static char	*double_quote(char **l, char *el, char **head, char *r);
 static char *dollar_sign(char **l, char *el, char **head, char *r);
 
+// TODO test parse cmd args where el is something like "|" etc
 // l should be the start of the cmd with the program name, el pointer to its end, before o token or etc
 char	**parse_cmd_args(char *l, char *el)
 {
